@@ -1,0 +1,33 @@
+--Создание таблиц
+CREATE TABLE Images (
+     Id    INT IDENTITY(1,1) NOT NULL CONSTRAINT Image_Id PRIMARY KEY,
+     Title Nvarchar(50) NOT NULL,
+     ImageByte varbinary(max) NOT NULL
+   );
+
+CREATE TABLE Tags
+(
+    Id INT IDENTITY(1,1) NOT NULL CONSTRAINT Tags_Id PRIMARY KEY,
+    Title Nvarchar(50) NOT NULL
+)
+
+CREATE TABLE "ImagesTags" (
+    "ImageId" INT NOT NULL,
+    "TagId"    INT NOT NULL,
+    CONSTRAINT "FK_ImagesTags_Images_ImageId" FOREIGN KEY("ImageId") REFERENCES "Images"("Id"),
+    CONSTRAINT "FK_ImagesTags_Tags_TagId" FOREIGN KEY("TagId") REFERENCES "Tags"("Id"),
+    CONSTRAINT "PK_ImagesTags" PRIMARY KEY("ImageId","TagId")
+)
+
+--Добавление строк в таблицу
+INSERT INTO Tags (Title)
+	VALUES (N'City'),
+		(N'Day'),
+		(N'Night'),
+		(N'Nature'),
+		(N'Forest')
+
+INSERT INTO ImagesTags (ImageId, TagId)
+	VALUES 
+	(1,1), (1,3), (2,2),
+	(2,4), (3,2), (3,4), (3,5)

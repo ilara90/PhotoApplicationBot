@@ -1,0 +1,24 @@
+﻿@model Image
+
+@{
+    ViewData["Title"] = "View Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.Title</h1>
+    <br />
+    @if (@Model.ImageByte != null)
+    {
+        <img style='width:1020px; height:500px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.ImageByte))" />
+    }
+    <br />
+    <label><b>Tag:</b></label>
+    <ul class="list-group list-group-flush">
+        @foreach (var t in @Model.Tags)
+        {
+            <li class="list-group-item">@t.Title</li>
+        }
+    </ul>
+    <br />
+    <a href="@Url.Action("Delete","Home", new { id = @Model.Id })" class="btn btn-primary">Delete</a>
+</div>

@@ -1,0 +1,28 @@
+﻿@using PhotoApplication.Models.View
+
+@model IndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <br />
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <label>Tags:</label>
+        @Html.ListBoxFor(x => x.TagIds, Model.Tags)
+        <input type="submit" value="Filter" class="btn btn-primary" />
+    </form>
+    <br />
+    <br />
+    <ul class="list-group list-group-flush">
+        @foreach (Image image in @Model.Images)
+        {
+            <li class="list-group-item">
+                @image.Title
+                <a href="@Url.Action("Details","Home", new { id = @image.Id })" class="btn btn-primary">View</a>
+            </li>
+        }
+    </ul>
+</div>

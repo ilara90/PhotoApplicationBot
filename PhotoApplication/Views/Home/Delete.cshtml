@@ -1,0 +1,22 @@
+﻿@model Image
+
+@{
+    ViewData["Title"] = "View Page";
+}
+
+<div class="header-h1">
+    <h1>@Model.Title</h1>
+    <br />   
+    <h3>
+        Are you sure you need to delete an image?
+    </h3>
+    <div>
+        <a href="@Url.Action("Index","Home")" class="btn btn-primary">No</a>
+        <br/>
+        <br/>
+        @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+        {
+            <input type="submit" value="Yes" class="btn btn-primary" />
+        }
+    </div>
+</div>
